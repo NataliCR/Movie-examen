@@ -1,0 +1,97 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin: 35px 0 20px;
+}
+
+.paginationButton {
+  padding: 11px 20px;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  background: white;
+  color: #172554;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.paginationButton:hover:not(:disabled) {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+.paginationButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.pageInfo {
+  min-width: 130px;
+  text-align: center;
+  color: #4b5563;
+  font-size: 15px;
+}
+
+.pageInfo strong {
+  color: #172554;
+}
+
+@media (max-width: 500px) {
+  .pagination {
+    gap: 10px;
+  }
+
+  .paginationButton {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .pageInfo {
+    min-width: auto;
+    font-size: 14px;
+  }
+}
+
+/*Boton  Ver todas la series*/
+.searchResults {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.searchResults p {
+  margin-bottom: 15px;
+  color: #4b5563;
+}
+
+.searchResults strong {
+  color: #172554;
+}
+
+.showAllButton {
+  padding: 11px 20px;
+  border: 1px solid #2563eb;
+  border-radius: 10px;
+  background: white;
+  color: #2563eb;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.showAllButton:hover {
+  background: #2563eb;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+.showAllButton:active {
+  transform: translateY(0);
+}
