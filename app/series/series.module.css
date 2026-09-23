@@ -1,3 +1,4 @@
+/* Contenedor principal de la paginacion */
 .pagination {
   display: flex;
   justify-content: center;
@@ -6,6 +7,7 @@
   margin: 35px 0 20px;
 }
 
+/* Botones Anterior y Siguiente */
 .paginationButton {
   padding: 11px 20px;
   border: 1px solid #bfdbfe;
@@ -18,6 +20,8 @@
   transition: all 0.2s ease;
 }
 
+/* Efecto cuando pasamos el mouse sobre un boton */
+/* :not(:disabled) evita aplicar el efecto a un boton deshabilitado */
 .paginationButton:hover:not(:disabled) {
   background: #2563eb;
   color: white;
@@ -26,11 +30,13 @@
   box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
 }
 
+/* Estilo de un boton cuando esta deshabilitado */
 .paginationButton:disabled {
   opacity: 0.45;
   cursor: not-allowed;
 }
 
+/* Informacion de la pagina actual */
 .pageInfo {
   min-width: 130px;
   text-align: center;
@@ -38,20 +44,26 @@
   font-size: 15px;
 }
 
+/* Estilo para el texto que esta dentro de <strong> */
 .pageInfo strong {
   color: #172554;
 }
 
+/* Adaptacion para pantallas pequeñas */
 @media (max-width: 500px) {
+
+  /* Reduce el espacio entre los elementos */
   .pagination {
     gap: 10px;
   }
 
+    /* Hace los botones mas pequeños */
   .paginationButton {
     padding: 10px 14px;
     font-size: 14px;
   }
 
+   /* Ajusta el texto de la pagina */
   .pageInfo {
     min-width: auto;
     font-size: 14px;
@@ -59,20 +71,25 @@
 }
 
 /*Boton  Ver todas la series*/
+
+/* Contenedor de los resultados de busqueda */
 .searchResults {
   text-align: center;
   margin-bottom: 25px;
 }
 
+/* Parrafo dentro de los resultados */
 .searchResults p {
   margin-bottom: 15px;
   color: #4b5563;
 }
 
+/* Texto marcado con <strong> */
 .searchResults strong {
   color: #172554;
 }
 
+/* Boton "Ver todas las series" */
 .showAllButton {
   padding: 11px 20px;
   border: 1px solid #2563eb;
@@ -85,6 +102,7 @@
   transition: all 0.2s ease;
 }
 
+/* Efecto al pasar el mouse sobre "Ver todas las series" */
 .showAllButton:hover {
   background: #2563eb;
   color: white;
@@ -92,6 +110,7 @@
   box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
 }
 
+/* Efecto mientras se presiona el botón */
 .showAllButton:active {
   transform: translateY(0);
 }

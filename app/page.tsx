@@ -4,9 +4,48 @@ import {
   Search,
   Heart,
   Library,
+  ArrowRight,
 } from "lucide-react";
 
-export default function Home() {
+type Serie = {
+  id: number;
+  name: string;
+  image?: {
+    medium: string;
+    original: string;
+  };
+};
+
+async function obtenerSeriesDestacadas(): Promise<Serie[]> {
+  const ids = [169, 2993, 465];
+
+  try {
+    const resultados = await Promise.all(
+      ids.map(async (id) => {
+        const response = await fetch(
+          `https://api.tvmaze.com/shows/${id}`,
+          {
+            cache: "force-cache",
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("No se pudo obtener la serie.");
+        }
+
+        return response.json();
+      })
+    );
+
+    return resultados;
+  } catch {
+    return [];
+  }
+}
+
+export default async function Home() {
+  const seriesDestacadas = await obtenerSeriesDestacadas();
+
   return (
     <main className="home">
       <section className="hero">
@@ -27,20 +66,45 @@ export default function Home() {
           </p>
 
           <Link href="/series" className="exploreButton">
+            <Search size={20} />
             Explorar series
-            <span>→</span>
+            <ArrowRight size={18} />
           </Link>
         </div>
 
-        <div className="heroIcon">
-          <Clapperboard size={90} strokeWidth={1.5} />
+        <div className="posterArea">
+          {seriesDestacadas.length > 0 ? (
+            seriesDestacadas.map((serie, index) => (
+              <Link
+                key={serie.id}
+                href={`/serie/${serie.id}`}
+                className={`poster poster${index + 1}`}
+              >
+                {serie.image ? (
+                  <img
+                    src={serie.image.original}
+                    alt={`Póster de ${serie.name}`}
+                  />
+                ) : (
+                  <div className="posterPlaceholder">
+                    <Clapperboard size={40} />
+                    <span>{serie.name}</span>
+                  </div>
+                )}
+              </Link>
+            ))
+          ) : (
+            <div className="posterFallback">
+              <Clapperboard size={70} strokeWidth={1.5} />
+            </div>
+          )}
         </div>
       </section>
 
       <section className="features">
         <div className="feature">
           <div className="featureIcon">
-            <Search size={40} strokeWidth={1.8} />
+            <Search size={38} strokeWidth={1.8} />
           </div>
 
           <h2>Busca series</h2>
@@ -53,7 +117,7 @@ export default function Home() {
 
         <div className="feature">
           <div className="featureIcon">
-            <Heart size={40} strokeWidth={1.8} />
+            <Heart size={38} strokeWidth={1.8} />
           </div>
 
           <h2>Guarda favoritas</h2>
@@ -66,7 +130,7 @@ export default function Home() {
 
         <div className="feature">
           <div className="featureIcon">
-            <Library size={40} strokeWidth={1.8} />
+            <Library size={38} strokeWidth={1.8} />
           </div>
 
           <h2>Conoce cada serie</h2>
@@ -75,6 +139,37 @@ export default function Home() {
             Consulta información como género, estreno, idioma,
             duración y calificación.
           </p>
+        </div>
+      </section>
+
+      <section className="genresSection">
+        <div className="sectionTitle">
+          <span></span>
+
+          <h2>Explora por género</h2>
+
+          <p>
+            Encuentra series de diferentes géneros y descubre
+            nuevos títulos.
+          </p>
+        </div>
+
+        <div className="genreList">
+          <Link href="/series" className="genreButton">
+            Drama
+          </Link>
+
+          <Link href="/series" className="genreButton">
+            Comedia
+          </Link>
+
+          <Link href="/series" className="genreButton">
+            Acción
+          </Link>
+
+          <Link href="/series" className="genreButton">
+            Ciencia ficción
+          </Link>
         </div>
       </section>
     </main>

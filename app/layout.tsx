@@ -1,5 +1,5 @@
-import Header from "@/components/Header/Header";
-import "./globals.css";
+import Header from "@/components/Header/Header"; // Importa el componente Header que se mostrará en todas las páginas
+import "./globals.css"; // Importa los estilos globales del proyecto
 
 export default function RootLayout({
   children,

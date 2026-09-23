@@ -1,25 +1,31 @@
+/* ConfiguraciOn general*/
+
+/* Todos los elementos */
 * {
   box-sizing: border-box;
 }
-
+/* Quitamos los mArgenes y espacios predeterminados */
 html,
 body {
   margin: 0;
   padding: 0;
 }
 
+/* Estilos generales de toda la página */
 body {
-  background-color: #eaf4ff;
+  background-color: #eef6ff;
   color: #172554;
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Contenido principal */
 main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 24px;
 }
 
+/* TItulos principales */
 h1 {
   margin: 0 0 10px;
   text-align: center;
@@ -27,53 +33,105 @@ h1 {
   color: #172554;
 }
 
+/* Espaciado de los párrafos */
 p {
   line-height: 1.5;
 }
 
+/* Los botones e inputs utilizan la misma fuente */
+
+/* Contenedor de la página de inicio */
 button,
 input {
   font-family: inherit;
 }
 
+/* INICIO*/
+
 .home {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 50px 24px;
+  padding: 45px 24px 60px;
 }
 
+/*  HERO */
+/*Fondo blanco, Circulos azul claro, Bordes redondeados, Sombra alrededor.*/
 .hero {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 40px;
-  padding: 60px;
-  background: white;
-  border-radius: 20px;
+  gap: 50px;
+  min-height: 470px;
+  padding: 55px 60px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 90% 20%,
+      #dbeafe 0,
+      transparent 22%
+    ),
+    radial-gradient(
+      circle at 75% 85%,
+      #dbeafe 0,
+      transparent 25%
+    ),
+    white;
   border: 1px solid #dbeafe;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(23, 37, 84, 0.08);
 }
 
+/* Decoracion del fondo */
+/* pseudo-elementos, agregar circulos decorativos sin tener que crear elementos HTML adicionales.*/
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: #eff6ff;
+  top: -80px;
+  left: -80px;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #bfdbfe;
+  right: 35px;
+  bottom: 35px;
+}
+
+/*  TEXTO DEL HERO*/
+
+/*Pocision del texto*/
 .heroContent {
-  max-width: 650px;
+  position: relative;
+  z-index: 2;
+  max-width: 590px;
 }
 
 .subtitle {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 0 0 15px;
+  margin: 0 0 16px;
   color: #2563eb;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
 }
 
+/*Titulo principal del Hero*/
 .hero h1 {
   margin: 0 0 20px;
   text-align: left;
-  font-size: 48px;
-  line-height: 1.15;
+  font-size: 50px;
+  line-height: 1.08;
   color: #172554;
 }
 
@@ -82,40 +140,145 @@ input {
 }
 
 .description {
-  max-width: 550px;
+  max-width: 540px;
   margin-bottom: 30px;
   color: #4b5563;
   font-size: 18px;
 }
 
+/* BOTON PRINCIPAL*/
+
 .exploreButton {
-  display: inline-block;
-  padding: 14px 24px;
-  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 21px;
+  border-radius: 11px;
   background: #2563eb;
   color: white;
   text-decoration: none;
   font-weight: bold;
-  transition: background 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
+  transition:
+    background  0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
+/* Efecto al pasar el mouse */
 .exploreButton:hover {
   background: #1d4ed8;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 9px 20px rgba(37, 99, 235, 0.3);
 }
 
-.heroIcon {
-  width: 180px;
-  height: 180px;
+/* POSTERS */
+
+/*Define el espacio donde estaran los tres posters.*/
+.posterArea {
+  position: relative;
+  z-index: 2;
+  width: 440px;
+  height: 370px;
+  flex-shrink: 0;
+}
+/*crea el circulo azul claro detras de los posters.*/
+.posterArea::before {
+  content: "";
+  position: absolute;
+  width: 270px;
+  height: 270px;
+  border-radius: 50%;
+  background: #dbeafe;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*Diseño de cada poster*/
+.poster {
+  position: absolute;
+  display: block;
+  width: 170px;
+  height: 255px;
+  overflow: hidden;
+  border: 5px solid white;
+  border-radius: 13px;
+  background: #e5e7eb;
+  box-shadow: 0 15px 30px rgba(23, 37, 84, 0.22);
+  transition:
+    transform 0.3s ease,
+    z-index 0.3s ease;
+}
+
+/*Imagen del poster*/
+.poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/*Posicion de los tres posters*/
+.poster1 {
+  left: 15px;
+  top: 75px;
+  transform: rotate(-9deg);
+  z-index: 1;
+}
+
+.poster2 {
+  left: 135px;
+  top: 30px;
+  transform: rotate(2deg);
+  z-index: 3;
+}
+
+.poster3 {
+  right: 5px;
+  top: 70px;
+  transform: rotate(9deg);
+  z-index: 2;
+}
+
+/*Efecto al pasar el mouse*/
+.poster:hover {
+  z-index: 10;
+  transform: translateY(-10px) rotate(0deg) scale(1.04);
+}
+
+.posterPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 15px;
+  text-align: center;
+  color: #172554;
+  background: #dbeafe;
+}
+
+.posterPlaceholder span {
+  font-weight: bold;
+}
+
+.posterFallback {
+  position: absolute;
+  inset: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   background: #dbeafe;
-  font-size: 90px;
-  flex-shrink: 0;
+  color: #2563eb;
 }
 
+/* CARACTERISTICAS*/
+
+/*Crea tres columnas*/
 .features {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -126,37 +289,124 @@ input {
 .feature {
   padding: 30px;
   background: white;
-  border-radius: 16px;
   border: 1px solid #dbeafe;
-  text-align: center;
+  border-radius: 17px;
+  text-align: left;
+  box-shadow: 0 5px 18px rgba(23, 37, 84, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
+.feature:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(23, 37, 84, 0.1);
+}
+
+/*Iconos de las tarjetas*/
 .featureIcon {
-  font-size: 40px;
-  margin-bottom: 15px;
+  width: 68px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #2563eb;
 }
 
+/*Texto principal de las tarjetas*/
 .feature h2 {
   margin: 0 0 10px;
   color: #172554;
   font-size: 21px;
 }
 
+/*Tecto de las tarjetas*/
 .feature p {
   margin: 0;
   color: #6b7280;
 }
 
-@media (max-width: 750px) {
+/* GENEROS*/
+/*diseña la seccion donde aparecen los generos.*/
+.genresSection {
+  margin-top: 45px;
+  padding: 35px;
+  background: #f8fbff;
+  border: 1px solid #dbeafe;
+  border-radius: 20px;
+}
+
+.sectionTitle span {
+  display: block;
+  width: 38px;
+  height: 4px;
+  margin-bottom: 12px;
+  border-radius: 5px;
+  background: #2563eb;
+}
+
+.sectionTitle h2 {
+  margin: 0 0 8px;
+  color: #172554;
+  font-size: 28px;
+}
+
+.sectionTitle p {
+  margin: 0;
+  color: #6b7280;
+}
+
+.genreList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 25px;
+}
+
+.genreButton {
+  padding: 11px 20px;
+  border: 1px solid #dbeafe;
+  border-radius: 30px;
+  background: white;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: bold;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.genreButton:hover {
+  background: #2563eb;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* RESPONSIVE */
+
+/*Cambia el diseño dependiendo del tamaño del telefono*/
+@media (max-width: 950px) {
   .hero {
     flex-direction: column;
     text-align: center;
-    padding: 40px 25px;
+    padding: 45px 35px;
+  }
+
+  .heroContent {
+    max-width: 650px;
+  }
+
+  .subtitle {
+    justify-content: center;
   }
 
   .hero h1 {
     text-align: center;
-    font-size: 38px;
+    font-size: 42px;
   }
 
   .description {
@@ -164,13 +414,88 @@ input {
     margin-right: auto;
   }
 
+  .posterArea {
+    width: 390px;
+    height: 330px;
+  }
+}
+
+@media (max-width: 750px) {
+  .home {
+    padding: 25px 16px 45px;
+  }
+
+  .hero {
+    padding: 40px 22px;
+    min-height: auto;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+
+  .description {
+    font-size: 16px;
+  }
+
+  .posterArea {
+    width: 340px;
+    height: 300px;
+    transform: scale(0.9);
+  }
+
   .features {
     grid-template-columns: 1fr;
   }
 
-  .heroIcon {
-    width: 140px;
-    height: 140px;
-    font-size: 70px;
+  .feature {
+    text-align: center;
+  }
+
+  .featureIcon {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .genresSection {
+    padding: 25px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 31px;
+  }
+
+  .posterArea {
+    width: 300px;
+    height: 270px;
+    transform: scale(0.82);
+    margin: -15px 0;
+  }
+
+  .poster {
+    width: 145px;
+    height: 220px;
+  }
+
+  .poster1 {
+    left: 0;
+  }
+
+  .poster2 {
+    left: 78px;
+  }
+
+  .poster3 {
+    right: 0;
+  }
+
+  .genreList {
+    flex-direction: column;
+  }
+
+  .genreButton {
+    text-align: center;
   }
 }

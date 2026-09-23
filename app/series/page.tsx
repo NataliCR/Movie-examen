@@ -29,7 +29,7 @@ export default function SeriesPage() {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState("");
   const [busqueda, setBusqueda] = useState("");
-
+   // Guarda el número de página actual
   const [paginaActual, setPaginaActual] = useState(() => {
     if (typeof window === "undefined") {
       return 1;
@@ -43,14 +43,17 @@ export default function SeriesPage() {
 
   const seriesPorPagina = 20;
 
+    // Calculamos desde que posicion del arreglo comenzara la pagina
   const indiceInicial = (paginaActual - 1) * seriesPorPagina;
+   // Calculamos donde termina la pagina
   const indiceFinal = indiceInicial + seriesPorPagina;
-
+   // Obtenemos solamente las series correspondientes a la pagina actual
   const seriesPagina = series.slice(indiceInicial, indiceFinal);
-
+  // Calculamos cuantas paginas existen en total
   const totalPaginas = Math.ceil(series.length / seriesPorPagina);
 
   useEffect(() => {
+      // Funcion para obtener las series
     const cargarSeries = async () => {
       try {
         setCargando(true);
@@ -69,11 +72,13 @@ export default function SeriesPage() {
   }, []);
 
   useEffect(() => {
+     // Creamos la nueva direccion con el numero de pagina
     const nuevaUrl = `/series?pagina=${paginaActual}`;
 
     window.history.pushState(null, "", nuevaUrl);
   }, [paginaActual]);
 
+    // Funcion que se ejecuta cuando el usuario realiza una busqueda
   const manejarBusqueda = async (texto: string) => {
     try {
       setCargando(true);
@@ -81,6 +86,7 @@ export default function SeriesPage() {
       setBusqueda(texto);
       setPaginaActual(1);
 
+        // Buscamos las series utilizando el texto
       const resultados = await buscarSeries(texto);
       setSeries(resultados);
     } catch {
@@ -90,13 +96,15 @@ export default function SeriesPage() {
     }
   };
 
+  // Funcion para volver a mostrar todas las series
+
   const mostrarTodas = async () => {
     try {
       setCargando(true);
       setError("");
       setBusqueda("");
       setPaginaActual(1);
-
+      // Obtenemos nuevamente todas las series  
       const datos = await obtenerSeries();
       setSeries(datos);
     } catch {
