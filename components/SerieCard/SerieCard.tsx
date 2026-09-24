@@ -52,7 +52,7 @@ export default function SerieCard({ serie, paginaActual }: SerieCardProps) {
             <div className={styles.noImage}>Sin imagen</div>
           )}
         </Link>
-        //Boton que activa favorito
+        {/*Boton que activa favorito*/}
         <button
           className={styles.favoriteButton}
           onClick={manejarFavorito}

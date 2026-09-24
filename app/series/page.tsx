@@ -6,6 +6,7 @@ import SerieGrid from "@/components/SerieGrid/SerieGrid";
 import Loading from "@/components/Loading/Loading";
 import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
 import EmptyState from "@/components/EmptyState/EmptyState";
+import SerieFilters from "@/components/SerieFilters/SerieFilters";
 import { buscarSeries, obtenerSeries } from "@/services/tvApi";
 import styles from "./series.module.css";
 
@@ -22,6 +23,7 @@ type Serie = {
   rating?: {
     average: number | null;
   };
+  status?: string;
 };
 
 export default function SeriesPage() {
@@ -29,7 +31,8 @@ export default function SeriesPage() {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState("");
   const [busqueda, setBusqueda] = useState("");
-   // Guarda el número de página actual
+
+  // Guarda el numero de pagina actual
   const [paginaActual, setPaginaActual] = useState(() => {
     if (typeof window === "undefined") {
       return 1;
@@ -41,19 +44,64 @@ export default function SeriesPage() {
     return pagina > 0 ? pagina : 1;
   });
 
+  // Guarda el genero seleccionado
+  const [generoSeleccionado, setGeneroSeleccionado] = useState("Todos");
+
+  // Guarda el ano seleccionado
+  const [anioSeleccionado, setAnioSeleccionado] = useState("Todos");
+
+  // Guarda la calificacion minima seleccionada
+  const [calificacionSeleccionada, setCalificacionSeleccionada] = useState("0");
+
+  // Guarda el estado seleccionado
+  const [estadoSeleccionado, setEstadoSeleccionado] = useState("Todos");
+
   const seriesPorPagina = 20;
 
-    // Calculamos desde que posicion del arreglo comenzara la pagina
-  const indiceInicial = (paginaActual - 1) * seriesPorPagina;
-   // Calculamos donde termina la pagina
-  const indiceFinal = indiceInicial + seriesPorPagina;
-   // Obtenemos solamente las series correspondientes a la pagina actual
-  const seriesPagina = series.slice(indiceInicial, indiceFinal);
-  // Calculamos cuantas paginas existen en total
-  const totalPaginas = Math.ceil(series.length / seriesPorPagina);
+  // Filtramos las series dependiendo de las opciones seleccionadas
+  const seriesFiltradas = series.filter((serie) => {
+    // Comprueba el filtro de genero
+    const coincideGenero =
+      generoSeleccionado === "Todos" ||
+      serie.genres.includes(generoSeleccionado);
 
+    // Obtiene el ano de estreno
+    const anioSerie = serie.premiered ? serie.premiered.substring(0, 4) : "";
+
+    // Comprueba el filtro de ano
+    const coincideAnio =
+      anioSeleccionado === "Todos" || anioSerie === anioSeleccionado;
+
+    // Obtiene la calificacion de la serie
+    const calificacionSerie = serie.rating?.average ?? 0;
+
+    // Comprueba la calificacion minima
+    const coincideCalificacion =
+      calificacionSerie >= Number(calificacionSeleccionada);
+
+    // Comprueba el estado de la serie
+    const coincideEstado =
+      estadoSeleccionado === "Todos" || serie.status === estadoSeleccionado;
+
+    return (
+      coincideGenero && coincideAnio && coincideCalificacion && coincideEstado
+    );
+  });
+
+  // Calculamos desde que posicion del arreglo comenzara la pagina
+  const indiceInicial = (paginaActual - 1) * seriesPorPagina;
+
+  // Calculamos donde termina la pagina
+  const indiceFinal = indiceInicial + seriesPorPagina;
+
+  // Obtenemos solamente las series correspondientes a la pagina actual
+  const seriesPagina = seriesFiltradas.slice(indiceInicial, indiceFinal);
+
+  // Calculamos cuantas paginas existen en total
+  const totalPaginas = Math.ceil(seriesFiltradas.length / seriesPorPagina);
+
+  // Funcion para obtener las series
   useEffect(() => {
-      // Funcion para obtener las series
     const cargarSeries = async () => {
       try {
         setCargando(true);
@@ -71,14 +119,14 @@ export default function SeriesPage() {
     cargarSeries();
   }, []);
 
+  // Actualiza el numero de pagina en la direccion
   useEffect(() => {
-     // Creamos la nueva direccion con el numero de pagina
     const nuevaUrl = `/series?pagina=${paginaActual}`;
 
     window.history.pushState(null, "", nuevaUrl);
   }, [paginaActual]);
 
-    // Funcion que se ejecuta cuando el usuario realiza una busqueda
+  // Funcion que se ejecuta cuando el usuario realiza una busqueda
   const manejarBusqueda = async (texto: string) => {
     try {
       setCargando(true);
@@ -86,7 +134,7 @@ export default function SeriesPage() {
       setBusqueda(texto);
       setPaginaActual(1);
 
-        // Buscamos las series utilizando el texto
+      // Buscamos las series utilizando el texto
       const resultados = await buscarSeries(texto);
       setSeries(resultados);
     } catch {
@@ -97,14 +145,20 @@ export default function SeriesPage() {
   };
 
   // Funcion para volver a mostrar todas las series
-
   const mostrarTodas = async () => {
     try {
       setCargando(true);
       setError("");
       setBusqueda("");
       setPaginaActual(1);
-      // Obtenemos nuevamente todas las series  
+
+      // Reiniciamos los filtros
+      setGeneroSeleccionado("Todos");
+      setAnioSeleccionado("Todos");
+      setCalificacionSeleccionada("0");
+      setEstadoSeleccionado("Todos");
+
+      // Obtenemos nuevamente todas las series
       const datos = await obtenerSeries();
       setSeries(datos);
     } catch {
@@ -112,6 +166,39 @@ export default function SeriesPage() {
     } finally {
       setCargando(false);
     }
+  };
+
+  // Funcion que se ejecuta cuando cambia el genero
+  const manejarGenero = (genero: string) => {
+    setGeneroSeleccionado(genero);
+    setPaginaActual(1);
+  };
+
+  // Funcion que se ejecuta cuando cambia el ano
+  const manejarAnio = (anio: string) => {
+    setAnioSeleccionado(anio);
+    setPaginaActual(1);
+  };
+
+  // Funcion que se ejecuta cuando cambia la calificacion
+  const manejarCalificacion = (calificacion: string) => {
+    setCalificacionSeleccionada(calificacion);
+    setPaginaActual(1);
+  };
+
+  // Funcion que se ejecuta cuando cambia el estado
+  const manejarEstado = (estado: string) => {
+    setEstadoSeleccionado(estado);
+    setPaginaActual(1);
+  };
+
+  // Funcion para limpiar todos los filtros
+  const limpiarFiltros = () => {
+    setGeneroSeleccionado("Todos");
+    setAnioSeleccionado("Todos");
+    setCalificacionSeleccionada("0");
+    setEstadoSeleccionado("Todos");
+    setPaginaActual(1);
   };
 
   return (
@@ -129,6 +216,18 @@ export default function SeriesPage() {
 
       <SearchBar onSearch={manejarBusqueda} />
 
+      <SerieFilters
+        generoSeleccionado={generoSeleccionado}
+        cambiarGenero={manejarGenero}
+        anioSeleccionado={anioSeleccionado}
+        cambiarAnio={manejarAnio}
+        calificacionSeleccionada={calificacionSeleccionada}
+        cambiarCalificacion={manejarCalificacion}
+        estadoSeleccionado={estadoSeleccionado}
+        cambiarEstado={manejarEstado}
+        limpiarFiltros={limpiarFiltros}
+      />
+
       {busqueda && (
         <div className={styles.searchResults}>
           <p>
@@ -145,11 +244,11 @@ export default function SeriesPage() {
 
       {error && <ErrorMessage mensaje={error} onRetry={mostrarTodas} />}
 
-      {!cargando && !error && series.length === 0 && (
-        <EmptyState mensaje="No se encontraron series con esa búsqueda." />
+      {!cargando && !error && seriesFiltradas.length === 0 && (
+        <EmptyState mensaje="No se encontraron series con los filtros seleccionados." />
       )}
 
-      {!cargando && !error && series.length > 0 && (
+      {!cargando && !error && seriesFiltradas.length > 0 && (
         <>
           <SerieGrid series={seriesPagina} paginaActual={paginaActual} />
 

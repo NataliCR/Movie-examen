@@ -359,32 +359,134 @@ input {
   color: #6b7280;
 }
 
-.genreList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
+/* TARJETAS DE GENEROS */
+
+/* Contenedor de las tarjetas */
+
+.genreCards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
   margin-top: 25px;
 }
 
-.genreButton {
-  padding: 11px 20px;
-  border: 1px solid #dbeafe;
-  border-radius: 30px;
+/* Tarjeta de cada genero */
+
+.genreCard {
+  padding: 24px 20px;
   background: white;
-  color: #2563eb;
-  text-decoration: none;
-  font-weight: bold;
+  border: 1px solid #dbeafe;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(23, 37, 84, 0.05);
   transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.genreButton:hover {
-  background: #2563eb;
-  color: white;
-  transform: translateY(-2px);
+
+/* Icono de cada genero */
+
+.genreIcon {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  border-radius: 14px;
 }
+
+/* Colores de los iconos */
+
+.dramaIcon {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.comedyIcon {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.actionIcon {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.scienceIcon {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.adventureIcon {
+  background: #ffedd5;
+  color: #ea580c;
+}
+
+.thrillerIcon {
+  background: #e0e7ff;
+  color: #4f46e5;
+}
+
+.horrorIcon {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.romanceIcon {
+  background: #fce7f3;
+  color: #db2777;
+}
+
+.fantasyIcon {
+  background: #f3e8ff;
+  color: #9333ea;
+}
+
+.crimeIcon {
+  background: #ccfbf1;
+  color: #0f766e;
+}
+
+.mysteryIcon {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+
+.familyIcon {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.animeIcon {
+  background: #fce7f3;
+  color: #db2777;
+}
+
+/* Nombre del genero */
+
+.genreCard h3 {
+  margin: 0 0 8px;
+  color: #172554;
+  font-size: 19px;
+}
+
+/* Descripcion del genero */
+
+.genreCard p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Efecto al pasar el mouse */
+
+.genreCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 24px rgba(23, 37, 84, 0.1);
+}
+
 
 /* RESPONSIVE */
 
@@ -460,6 +562,10 @@ input {
   .genresSection {
     padding: 25px 20px;
   }
+
+  .genreCards {
+  grid-template-columns: repeat(2, 1fr);
+}
 }
 
 @media (max-width: 480px) {
@@ -491,11 +597,181 @@ input {
     right: 0;
   }
 
-  .genreList {
-    flex-direction: column;
+  .genreCards {
+  grid-template-columns: 1fr;
+}
+}
+
+/* Secciones de series en la pagina de inicio */
+
+.seriesSection {
+  padding: 70px 0;
+  margin-top: 20px;
+}
+
+/* Encabezado de cada seccion */
+
+.sectionHeading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #2563eb;
+}
+
+.sectionHeading h2 {
+  margin: 0;
+  color: #172554;
+  font-size: 32px;
+}
+
+/* Contenedor de las tarjetas */
+
+.homeSeriesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  margin-top: 30px;
+}
+
+/* Tarjeta de serie */
+
+.homeSeriesCard {
+  display: block;
+  overflow: hidden;
+  background: white;
+  border: 1px solid #dbeafe;
+  border-radius: 16px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 5px 15px rgba(23, 37, 84, 0.07);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.homeSeriesCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(23, 37, 84, 0.13);
+}
+
+/* Imagen de la serie */
+
+.homeSeriesImage {
+  width: 100%;
+  height: 290px;
+  overflow: hidden;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+}
+
+.homeSeriesImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.homeSeriesCard:hover .homeSeriesImage img {
+  transform: scale(1.04);
+}
+
+/* Informacion de la serie */
+
+.homeSeriesInfo {
+  padding: 16px;
+}
+
+.homeSeriesInfo h3 {
+  margin: 0 0 9px;
+  color: #172554;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.homeSeriesInfo p {
+  margin: 0 0 9px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* Calificacion */
+
+.homeSeriesRating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #d97706;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Boton de la seccion */
+
+.sectionButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.sectionButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border: 1px solid #bfdbfe;
+  border-radius: 25px;
+  background: white;
+  color: #2563eb;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sectionButton:hover {
+  background: #2563eb;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Separacion de la seccion de populares */
+
+.popularSection {
+  border-top: 1px solid #dbeafe;
+}
+
+/* Responsive para tablets */
+
+@media (max-width: 1000px) {
+  .homeSeriesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Responsive para celulares */
+
+@media (max-width: 500px) {
+  .seriesSection {
+    padding: 50px 0;
   }
 
-  .genreButton {
-    text-align: center;
+  .sectionHeading h2 {
+    font-size: 26px;
+  }
+
+  .homeSeriesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .homeSeriesImage {
+    height: 330px;
   }
 }

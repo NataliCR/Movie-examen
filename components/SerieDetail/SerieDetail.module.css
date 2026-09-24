@@ -1,7 +1,11 @@
+/* Contenedor principal del detalle */
+
 .detail {
   max-width: 1100px;
   margin: 0 auto;
 }
+
+/* Boton para regresar a la pagina anterior */
 
 .back {
   display: inline-flex;
@@ -16,8 +20,11 @@
   text-decoration: none;
   font-size: 15px;
   font-weight: bold;
+  cursor: pointer;
   transition: all 0.2s ease;
 }
+
+/* Efecto al pasar el mouse por el boton */
 
 .back:hover {
   background: #2563eb;
@@ -27,9 +34,13 @@
   box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
 }
 
+/* Efecto cuando se presiona el boton */
+
 .back:active {
   transform: translateY(0);
 }
+
+/* Contenedor que separa imagen e informacion */
 
 .container {
   display: grid;
@@ -42,6 +53,8 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
+/* Contenedor de la imagen */
+
 .imageContainer {
   width: 100%;
   min-height: 450px;
@@ -50,12 +63,16 @@
   overflow: hidden;
 }
 
+/* Imagen principal */
+
 .image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
+
+/* Mensaje cuando no existe una imagen */
 
 .noImage {
   width: 100%;
@@ -67,6 +84,8 @@
   color: #6b7280;
 }
 
+/* Informacion principal */
+
 .info h1 {
   margin-top: 0;
   margin-bottom: 20px;
@@ -74,14 +93,127 @@
   color: #172554;
 }
 
+/* Parrafos de informacion */
+
 .info p {
   color: #374151;
   font-size: 16px;
 }
 
+/* Texto importante */
+
 .info strong {
   color: #172554;
 }
+
+/* Boton de favoritos */
+
+.favoriteButton {
+  margin-bottom: 20px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Efecto al pasar el mouse por favoritos */
+
+.favoriteButton:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+/* Contenedor de informacion adicional */
+
+.detailsInfo {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 25px 0;
+}
+
+/* Cada bloque de informacion */
+
+.detailItem {
+  padding: 13px 15px;
+  background: #eff6ff;
+  border-radius: 10px;
+  border: 1px solid #dbeafe;
+}
+
+/* Titulo de cada bloque */
+
+.detailItem strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #172554;
+  font-size: 14px;
+}
+
+/* Valor de cada bloque */
+
+.detailItem span {
+  color: #374151;
+  font-size: 15px;
+}
+
+/* Estado cuando la serie esta en emision */
+
+.statusRunning {
+  color: #15803d !important;
+  font-weight: bold;
+}
+
+/* Estado cuando la serie termino */
+
+.statusEnded {
+  color: #b91c1c !important;
+  font-weight: bold;
+}
+
+/* Contenedor de los generos */
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+/* Etiqueta individual de genero */
+
+.genre {
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: white;
+  border: 1px solid #bfdbfe;
+  color: #2563eb !important;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Contenedor de la calificacion */
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #d97706 !important;
+  font-weight: bold;
+}
+
+/* Adaptacion para tablets */
 
 @media (max-width: 750px) {
   .container {
@@ -101,29 +233,10 @@
   }
 }
 
-.favoriteButton {
-  margin-bottom: 20px;
-  padding: 12px 18px;
-  border: none;
-  border-radius: 10px;
-  background: #2563eb;
-  color: white;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+/* Adaptacion para celulares */
 
-.favoriteButton:hover {
-  background: #1d4ed8;
-  transform: translateY(-2px);
-}
-
-.rating {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+@media (max-width: 500px) {
+  .detailsInfo {
+    grid-template-columns: 1fr;
+  }
 }

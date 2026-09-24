@@ -5,6 +5,7 @@ import { ArrowLeft, Heart, Star } from "lucide-react";
 import { useFavorites } from "@/hooks/useFavorites";
 import styles from "./SerieDetail.module.css";
 
+// Definimos la estructura de datos de una serie
 type Serie = {
   id: number;
   name: string;
@@ -23,16 +24,25 @@ type Serie = {
   runtime?: number | null;
 };
 
+// Definimos las propiedades que recibe el componente
 type SerieDetailProps = {
   serie: Serie;
 };
 
 export default function SerieDetail({ serie }: SerieDetailProps) {
   const router = useRouter();
-  const { agregarFavorito, eliminarFavorito, esFavorito } = useFavorites();
 
+  // Obtenemos las funciones para manejar favoritos
+  const {
+    agregarFavorito,
+    eliminarFavorito,
+    esFavorito,
+  } = useFavorites();
+
+  // Comprobamos si la serie ya esta guardada como favorita
   const favorito = esFavorito(serie.id);
 
+  // Funcion para agregar o quitar una serie de favoritos
   const manejarFavorito = () => {
     if (favorito) {
       eliminarFavorito(serie.id);
@@ -41,14 +51,35 @@ export default function SerieDetail({ serie }: SerieDetailProps) {
     }
   };
 
+  // Convierte el estado de la API a un texto mas amigable
+  const obtenerEstado = () => {
+    if (serie.status === "Running") {
+      return "En emision";
+    }
+
+    if (serie.status === "Ended") {
+      return "Finalizada";
+    }
+
+    return serie.status || "No disponible";
+  };
+
   return (
     <section className={styles.detail}>
-      <button className={styles.back} onClick={() => router.back()}>
+
+      {/* Boton para regresar a la pagina anterior */}
+      <button
+        className={styles.back}
+        onClick={() => router.back()}
+      >
         <ArrowLeft size={18} />
         Volver a series
       </button>
 
+      {/* Contenedor principal de la informacion */}
       <div className={styles.container}>
+
+        {/* Contenedor de la imagen */}
         <div className={styles.imageContainer}>
           {serie.image ? (
             <img
@@ -57,17 +88,29 @@ export default function SerieDetail({ serie }: SerieDetailProps) {
               className={styles.image}
             />
           ) : (
-            <div className={styles.noImage}>Sin imagen</div>
+            <div className={styles.noImage}>
+              Sin imagen
+            </div>
           )}
         </div>
 
+        {/* Informacion de la serie */}
         <div className={styles.info}>
+
+          {/* Nombre de la serie */}
           <h1>{serie.name}</h1>
 
-          <button className={styles.favoriteButton} onClick={manejarFavorito}>
+          {/* Boton para manejar favoritos */}
+          <button
+            className={styles.favoriteButton}
+            onClick={manejarFavorito}
+          >
             {favorito ? (
               <>
-                <Heart size={18} fill="currentColor" />
+                <Heart
+                  size={18}
+                  fill="currentColor"
+                />
                 Quitar de favoritos
               </>
             ) : (
@@ -78,6 +121,7 @@ export default function SerieDetail({ serie }: SerieDetailProps) {
             )}
           </button>
 
+          {/* Descripcion de la serie */}
           {serie.summary && (
             <div
               dangerouslySetInnerHTML={{
@@ -86,43 +130,95 @@ export default function SerieDetail({ serie }: SerieDetailProps) {
             />
           )}
 
-          {serie.genres.length > 0 && (
-            <p>
-              <strong>Géneros:</strong> {serie.genres.join(", ")}
-            </p>
-          )}
+          {/* Informacion adicional de la serie */}
+          <div className={styles.detailsInfo}>
 
-          {serie.premiered && (
-            <p>
-              <strong>Estreno:</strong> {serie.premiered.substring(0, 4)}
-            </p>
-          )}
+            {/* Estado de la serie */}
+            <div className={styles.detailItem}>
+              <strong>Estado</strong>
 
-          {serie.rating?.average && (
-            <p className={styles.rating}>
-              <strong>Calificación:</strong>
-              <Star size={17} fill="currentColor" />
-              {serie.rating.average}
-            </p>
-          )}
+              <span
+                className={
+                  serie.status === "Running"
+                    ? styles.statusRunning
+                    : serie.status === "Ended"
+                    ? styles.statusEnded
+                    : ""
+                }
+              >
+                {obtenerEstado()}
+              </span>
+            </div>
 
-          {serie.status && (
-            <p>
-              <strong>Estado:</strong> {serie.status}
-            </p>
-          )}
+            {/* Ano de estreno */}
+            <div className={styles.detailItem}>
+              <strong>Estreno</strong>
 
-          {serie.language && (
-            <p>
-              <strong>Idioma:</strong> {serie.language}
-            </p>
-          )}
+              <span>
+                {serie.premiered
+                  ? serie.premiered.substring(0, 4)
+                  : "No disponible"}
+              </span>
+            </div>
 
-          {serie.runtime && (
-            <p>
-              <strong>Duración:</strong> {serie.runtime} minutos
-            </p>
-          )}
+            {/* Calificacion de la serie */}
+            <div className={styles.detailItem}>
+              <strong>Calificacion</strong>
+
+              <span className={styles.rating}>
+                <Star
+                  size={17}
+                  fill="currentColor"
+                />
+
+                {serie.rating?.average !== null &&
+                serie.rating?.average !== undefined
+                  ? serie.rating.average
+                  : "Sin calificacion"}
+              </span>
+            </div>
+
+            {/* Generos de la serie */}
+            <div className={styles.detailItem}>
+              <strong>Generos</strong>
+
+              {serie.genres.length > 0 ? (
+                <div className={styles.genres}>
+                  {serie.genres.map((genero) => (
+                    <span
+                      key={genero}
+                      className={styles.genre}
+                    >
+                      {genero}
+                    </span>
+                  ))}
+                </div>
+              ) : (
+                <span>No disponible</span>
+              )}
+            </div>
+
+            {/* Idioma de la serie */}
+            <div className={styles.detailItem}>
+              <strong>Idioma</strong>
+
+              <span>
+                {serie.language || "No disponible"}
+              </span>
+            </div>
+
+            {/* Duracion de los episodios */}
+            <div className={styles.detailItem}>
+              <strong>Duracion</strong>
+
+              <span>
+                {serie.runtime
+                  ? `${serie.runtime} minutos`
+                  : "No disponible"}
+              </span>
+            </div>
+
+          </div>
         </div>
       </div>
     </section>

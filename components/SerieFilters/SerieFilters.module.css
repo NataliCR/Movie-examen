@@ -1,0 +1,214 @@
+/* Contenedor principal de los filtros */
+
+.filters {
+  margin: 30px 0;
+  padding: 25px;
+  background: white;
+  border: 1px solid #dbeafe;
+  border-radius: 18px;
+  box-shadow: 0 5px 18px rgba(23, 37, 84, 0.05);
+}
+
+/* Boton para limpiar filtros */
+
+.clearContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.clearButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 17px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: white;
+  color: #4b5563;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Efecto al pasar el mouse */
+
+.clearButton:hover {
+  background: #eff6ff;
+  color: #2563eb;
+  border-color: #93c5fd;
+  transform: translateY(-2px);
+}
+
+/* Encabezado */
+
+.header {
+  margin-bottom: 22px;
+}
+
+.header h2 {
+  margin: 0 0 6px;
+  color: #172554;
+  font-size: 22px;
+}
+
+.header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* Grupo de cada filtro */
+
+.filterGroup {
+  margin-bottom: 20px;
+}
+
+/* Titulo del filtro */
+
+.filterTitle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 10px;
+  color: #2563eb;
+}
+
+.filterTitle h3 {
+  margin: 0;
+  color: #172554;
+  font-size: 15px;
+}
+
+/* Contenedor de botones de genero */
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+/* Botones de genero */
+
+.button {
+  padding: 9px 16px;
+  border: 1px solid #bfdbfe;
+  border-radius: 25px;
+  background: white;
+  color: #2563eb;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Efecto al pasar el mouse */
+
+.button:hover {
+  background: #eff6ff;
+  transform: translateY(-2px);
+}
+
+/* Boton seleccionado */
+
+.active {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+/* Contenedor de los tres filtros */
+
+.secondaryFilters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 5px;
+}
+
+/* Evita espacios diferentes entre los filtros */
+
+.secondaryFilters .filterGroup {
+  margin-bottom: 0;
+}
+
+/* Select */
+
+.select {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  background: white;
+  color: #172554;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.select:hover {
+  border-color: #60a5fa;
+}
+
+.select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Mensaje debajo de los filtros */
+
+.filterMessage {
+  margin: 18px 0 0;
+  text-align: center;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* Tablets */
+
+@media (max-width: 750px) {
+  .secondaryFilters {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Celulares */
+
+@media (max-width: 500px) {
+  .filters {
+    padding: 20px;
+  }
+
+  .buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .secondaryFilters {
+    grid-template-columns: 1fr;
+  }
+
+  .clearContainer {
+    justify-content: center;
+  }
+
+  .clearButton {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,142 @@
+.favoritosPage {
+min-height: 60vh;
+}
+
+/* Encabezado de la pagina */
+
+.header {
+margin-bottom: 25px;
+text-align: center;
+}
+
+.line {
+display: block;
+width: 38px;
+height: 4px;
+margin: 0 auto 12px;
+border-radius: 5px;
+background: #2563eb;
+}
+
+.header h1 {
+margin: 0 0 8px;
+color: #172554;
+font-size: 36px;
+}
+
+.header p {
+margin: 0;
+color: #6b7280;
+font-size: 16px;
+}
+
+/* Contenedor del indicador de carga */
+
+.loading {
+display: flex;
+justify-content: center;
+padding: 30px 0;
+}
+
+/* Mensaje de error */
+
+.error {
+margin: 30px auto;
+padding: 14px 20px;
+max-width: 600px;
+border: 1px solid #fecaca;
+border-radius: 10px;
+background: #fef2f2;
+color: #dc2626;
+text-align: center;
+}
+
+/* Mensaje cuando no existen favoritos */
+
+.empty {
+max-width: 600px;
+margin: 40px auto;
+padding: 45px 30px;
+border: 1px solid #dbeafe;
+border-radius: 18px;
+background: white;
+box-shadow: 0 5px 18px rgba(23, 37, 84, 0.06);
+text-align: center;
+}
+
+.emptyIcon {
+width: 70px;
+height: 70px;
+display: flex;
+align-items: center;
+justify-content: center;
+margin: 0 auto 20px;
+border-radius: 50%;
+background: #dbeafe;
+color: #2563eb;
+font-size: 40px;
+}
+
+.empty h2 {
+margin: 0 0 10px;
+color: #172554;
+font-size: 24px;
+}
+
+.empty p {
+max-width: 450px;
+margin: 0 auto;
+color: #6b7280;
+line-height: 1.6;
+}
+
+/* Contenedor de las series favoritas */
+
+.seriesContainer {
+margin-top: 10px;
+}
+
+/* Cantidad de series favoritas */
+
+.favoriteCount {
+margin: 0 24px 0;
+color: #6b7280;
+font-size: 14px;
+font-weight: bold;
+}
+
+/* Ajustes para pantallas pequeñas */
+
+@media (max-width: 750px) {
+.header h1 {
+font-size: 32px;
+}
+
+.header p {
+font-size: 15px;
+}
+
+.empty {
+padding: 35px 20px;
+}
+
+.favoriteCount {
+margin-left: 0;
+}
+}
+
+@media (max-width: 500px) {
+.header h1 {
+font-size: 29px;
+}
+
+.emptyIcon {
+width: 60px;
+height: 60px;
+font-size: 34px;
+}
+
+.empty h2 {
+font-size: 21px;
+}
+}
