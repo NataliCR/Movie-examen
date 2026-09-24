@@ -1,3 +1,4 @@
+/* Contenedor principal del indicador de carga */
 .loading {
   display: flex;
   flex-direction: column;
@@ -7,6 +8,7 @@
   text-align: center;
 }
 
+/* Elemento circular que funciona como indicador de carga */
 .spinner {
   width: 40px;
   height: 40px;
@@ -16,12 +18,14 @@
   animation: girar 0.8s linear infinite;
 }
 
+/* Texto que se muestra debajo del indicador */
 .loading p {
   margin-top: 15px;
   color: #172554;
   font-weight: bold;
 }
 
+/* Animacion que hace girar el indicador */
 @keyframes girar {
   to {
     transform: rotate(360deg);

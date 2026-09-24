@@ -7,12 +7,14 @@ type SearchBarProps = {
   onSearch: (texto: string) => void;
 };
 
+// Componente principal del buscador
 export default function SearchBar({ onSearch }: SearchBarProps) {
+    // Guardamos el texto que escribe el usuario
   const [texto, setTexto] = useState("");
 
   const manejarBusqueda = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    // Eliminamos los espacios innecesarios del texto
     const textoLimpio = texto.trim();
 
     if (textoLimpio === "") {

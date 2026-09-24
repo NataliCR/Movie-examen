@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Heart, Star } from "lucide-react";
+// Importamos el hook encargado de manejar las series favoritas
 import { useFavorites } from "@/hooks/useFavorites";
 import styles from "./SerieCard.module.css";
 
@@ -25,11 +26,16 @@ type SerieCardProps = {
   paginaActual: number;
 };
 
+// Componente que muestra la informacion de una serie en forma de tarjeta
 export default function SerieCard({ serie, paginaActual }: SerieCardProps) {
+  
+  // Obtenemos las funciones para agregar, eliminar y comprobar favoritos
   const { agregarFavorito, eliminarFavorito, esFavorito } = useFavorites();
 
+  // Comprobamos si la serie actual esta guardada como favorita
   const favorito = esFavorito(serie.id);
 
+  // Funcion que agrega o elimina la serie de favoritos
   const manejarFavorito = () => {
     if (favorito) {
       eliminarFavorito(serie.id);
@@ -61,7 +67,7 @@ export default function SerieCard({ serie, paginaActual }: SerieCardProps) {
           <Heart size={22} fill={favorito ? "currentColor" : "none"} />
         </button>
       </div>
-
+          {/* Enlace hacia los detalles de la serie */}
       <Link href={`/serie/${serie.id}?pagina=${paginaActual}`}>
         <div className={styles.content}>
           <h2>{serie.name}</h2>

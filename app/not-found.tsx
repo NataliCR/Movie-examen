@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+// Componente que se muestra cuando la pagina solicitada no existe
 export default function NotFound() {
   return (
     <main>

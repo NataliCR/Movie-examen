@@ -1,3 +1,4 @@
+/* Tarjeta principal de cada serie */
 .card {
   background: white;
   border-radius: 14px;
@@ -7,16 +8,19 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Efecto de la tarjeta al pasar el mouse */
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
+/* Elimina el estilo predeterminado de los enlaces */
 .card a {
   text-decoration: none;
   color: inherit;
 }
 
+/* Contenedor de la imagen de la serie */
 .imageContainer {
   width: 100%;
   height: 320px;
@@ -25,6 +29,7 @@
   position: relative;
 }
 
+/* Imagen principal de la serie */
 .image {
   width: 100%;
   height: 100%;
@@ -32,6 +37,7 @@
   display: block;
 }
 
+/* Contenedor que se muestra cuando no existe una imagen */
 .noImage {
   width: 100%;
   height: 100%;
@@ -42,28 +48,33 @@
   font-size: 14px;
 }
 
+/* Contenedor de la informacion de la serie */
 .content {
   padding: 16px;
 }
 
+/* Titulo de la serie */
 .content h2 {
   margin: 0 0 8px;
   font-size: 20px;
   color: #172554;
 }
 
+/* Generos de la serie */
 .genres {
   margin: 0 0 8px;
   color: #2563eb;
   font-size: 14px;
 }
 
+/* Ano de estreno de la serie */
 .year {
   margin: 0 0 8px;
   color: #6b7280;
   font-size: 14px;
 }
 
+/* Contenedor de la calificacion */
 .rating {
   margin: 0;
   display: flex;
@@ -73,6 +84,7 @@
   color: #374151;
 }
 
+/* Boton para agregar o quitar una serie de favoritos */
 .favoriteButton {
   position: absolute;
   top: 12px;
@@ -93,6 +105,7 @@
   display: block;
 }
 
+/* Efecto del boton de favoritos al pasar el mouse */
 .favoriteButton:hover {
   transform: scale(1.1);
 }

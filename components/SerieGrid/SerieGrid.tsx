@@ -1,6 +1,7 @@
 import SerieCard from "../SerieCard/SerieCard";
 import styles from "./SerieGrid.module.css";
 
+// Definimos la estructura de datos de una serie
 type Serie = {
   id: number;
   name: string;
@@ -21,6 +22,7 @@ type SerieGridProps = {
   paginaActual?: number;
 };
 
+// Componente que organiza las series dentro de una cuadricula
 export default function SerieGrid({
   series,
   paginaActual = 1,

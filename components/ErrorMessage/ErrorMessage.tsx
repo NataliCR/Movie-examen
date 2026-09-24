@@ -5,6 +5,7 @@ type ErrorMessageProps = {
   onRetry?: () => void;
 };
 
+// Componente que muestra un mensaje cuando ocurre un error
 export default function ErrorMessage({
   mensaje,
   onRetry,

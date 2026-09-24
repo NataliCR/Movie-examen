@@ -4,6 +4,7 @@ type EmptyStateProps = {
   mensaje: string;
 };
 
+// Componente que se muestra cuando no existen resultados
 export default function EmptyState({
   mensaje,
 }: EmptyStateProps) {

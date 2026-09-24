@@ -1,3 +1,4 @@
+/* Contenedor principal del mensaje de error */
 .error {
   max-width: 600px;
   margin: 40px auto;
@@ -9,12 +10,14 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+/* Texto que muestra el mensaje de error */
 .error p {
   margin: 0 0 15px;
   color: #b91c1c;
   font-weight: bold;
 }
 
+/* Boton para intentar nuevamente */
 .error button {
   padding: 10px 18px;
   border: none;
@@ -25,6 +28,7 @@
   cursor: pointer;
 }
 
+/* Cambia el color del boton al pasar el mouse */
 .error button:hover {
   background: #1d4ed8;
 }

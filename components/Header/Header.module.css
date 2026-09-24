@@ -1,20 +1,22 @@
+/* Contenedor principal del encabezado */
 .header {
   background: #172554;
   color: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
 }
 
+/* Contenedor interno del encabezado */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 16px 24px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
 }
 
+/* Estilos del logo y nombre de la aplicacion */
 .logo {
   display: flex;
   align-items: center;
@@ -25,12 +27,14 @@
   font-weight: bold;
 }
 
+/* Contenedor de los enlaces de navegacion */
 .nav {
   display: flex;
   align-items: center;
   gap: 24px;
 }
 
+/* Estilos de los enlaces del menu */
 .nav a {
   color: white;
   text-decoration: none;
@@ -38,24 +42,29 @@
   transition: opacity 0.2s ease;
 }
 
+/* Efecto de los enlaces al pasar el mouse */
 .nav a:hover {
   opacity: 0.75;
 }
 
+/* Adaptacion del encabezado para pantallas pequenas */
 @media (max-width: 600px) {
   .container {
     flex-direction: column;
   }
 
+  /* Reducimos el espacio entre los enlaces */
   .nav {
     gap: 16px;
   }
 
+  /* Reducimos el tamano del logo */
   .logo {
     font-size: 21px;
   }
 }
 
+/* Contenedor del enlace de favoritos */
 .favorites {
   display: flex;
   align-items: center;

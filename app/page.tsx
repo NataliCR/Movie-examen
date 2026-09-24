@@ -1,4 +1,5 @@
 import Link from "next/link";
+//Iconos
 import {
   Clapperboard,
   Search,
@@ -21,6 +22,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 
+//Estructura de datos de cada serie
 type Serie = {
   id: number;
   name: string;
@@ -35,12 +37,15 @@ type Serie = {
   };
 };
 
+// Obtiene las series que se mostraran en el hero principal
 async function obtenerSeriesDestacadas(): Promise<Serie[]> {
   const ids = [169, 2993, 465];
 
   try {
+    // Realizamos varias peticiones al mismo tiempo
     const resultados = await Promise.all(
       ids.map(async (id) => {
+        // Consultamos la informacion de cada serie en TVMaze
         const response = await fetch(`https://api.tvmaze.com/shows/${id}`, {
           cache: "force-cache",
         });
@@ -72,6 +77,7 @@ async function obtenerSeriesMejorCalificadas(): Promise<Serie[]> {
 
     const series: Serie[] = await response.json();
 
+    // Filtramos, ordenamos por calificacion y seleccionamos las primeras cuatro
     return series
       .filter((serie) => serie.rating?.average)
       .sort((a, b) => (b.rating?.average ?? 0) - (a.rating?.average ?? 0))
@@ -84,6 +90,7 @@ async function obtenerSeriesMejorCalificadas(): Promise<Serie[]> {
 // Obtiene una seleccion de series populares
 async function obtenerSeriesPopulares(): Promise<Serie[]> {
   try {
+    // Obtenemos las series disponibles desde TVMaze
     const response = await fetch("https://api.tvmaze.com/shows", {
       cache: "force-cache",
     });
@@ -91,16 +98,18 @@ async function obtenerSeriesPopulares(): Promise<Serie[]> {
     if (!response.ok) {
       throw new Error("No se pudieron obtener las series.");
     }
-
+    // Convertimos la respuesta a un arreglo de series
     const series: Serie[] = await response.json();
-
+    // Seleccionamos las primeras cuatro series del resultado
     return series.slice(0, 4);
   } catch {
     return [];
   }
 }
 
+// Componente principal de la pagina de inicio
 export default async function Home() {
+  // Cargamos las diferentes secciones de series al mismo tiempo
   const [seriesDestacadas, seriesMejorCalificadas, seriesPopulares] =
     await Promise.all([
       obtenerSeriesDestacadas(),
@@ -129,6 +138,7 @@ export default async function Home() {
             solo lugar.
           </p>
 
+ {/* Boton que lleva al catalogo de series */}
           <Link href="/series" className="exploreButton">
             <Search size={20} />
             Explorar series
@@ -139,6 +149,7 @@ export default async function Home() {
         <div className="posterArea">
           {seriesDestacadas.length > 0 ? (
             seriesDestacadas.map((serie, index) => (
+  // Cada poster funciona como enlace hacia el detalle de la serie
               <Link
                 key={serie.id}
                 href={`/serie/${serie.id}`}
@@ -166,7 +177,7 @@ export default async function Home() {
       </section>
 
       {/* Funciones principales */}
-
+      {/* Funcion de busqueda */}
       <section className="features">
         <div className="feature">
           <div className="featureIcon">
@@ -180,7 +191,8 @@ export default async function Home() {
             buscador.
           </p>
         </div>
-
+        
+      {/* Funcion para guardar series favoritas */}
         <div className="feature">
           <div className="featureIcon">
             <Heart size={38} strokeWidth={1.8} />
@@ -194,6 +206,7 @@ export default async function Home() {
           </p>
         </div>
 
+      {/* Funcion para consultar informacion de las series */}
         <div className="feature">
           <div className="featureIcon">
             <Library size={38} strokeWidth={1.8} />
@@ -256,6 +269,7 @@ export default async function Home() {
           ))}
         </div>
 
+      {/* Boton para consultar todas las series */}
         <div className="sectionButtonContainer">
           <Link href="/series" className="sectionButton">
             Ver todas las series
@@ -318,6 +332,7 @@ export default async function Home() {
           ))}
         </div>
 
+      {/* Boton para acceder al catalogo */}
         <div className="sectionButtonContainer">
           <Link href="/series" className="sectionButton">
             Explorar catalogo

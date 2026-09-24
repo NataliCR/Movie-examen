@@ -1,3 +1,4 @@
+/* Contenedor principal del estado vacio */
 .empty {
   max-width: 600px;
   margin: 40px auto;
@@ -9,16 +10,19 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+/* Icono que se muestra en el estado vacio */
 .icon {
   font-size: 45px;
   margin-bottom: 15px;
 }
 
+/* Titulo del mensaje */
 .empty h2 {
   margin: 0 0 10px;
   color: #172554;
 }
 
+/* Texto descriptivo del mensaje */
 .empty p {
   margin: 0;
   color: #6b7280;
